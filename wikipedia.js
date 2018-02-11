@@ -1,28 +1,4 @@
 
-/*
-Copyright (c) 2016 Vizrt
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.
-
-(MIT License)
-
-*/
 
 //Variable used in $("#results").change, findPages and setResults. Used to store all Q IDs in a search.
 let dropdownOptionId = [];
@@ -274,9 +250,11 @@ function getSize(resultData, callback) {
 
     $(document).ready(function() {
 
-        let pl = vizrt.payloadhosting;
+     /* let pl = vizrt.payloadhosting;
 
         pl.initialize();
+
+        */
 
         /**
          * @description Makes it possible to press enter to get search results, instead of clicking the search button.
@@ -294,11 +272,11 @@ function getSize(resultData, callback) {
 
             $("#searchInput").val("");
             $("#results").empty();
-            pl.setFieldText("wiki/author", "");
-            pl.setFieldText("wiki/info1", "");
-            pl.setFieldText("wiki/info2", "");
-            pl.setFieldText("wiki/info3", "");
-            pl.setFieldText("wiki/title", "");
+            $("#p1").val("");
+            $("#p2").val("");
+            $("#p3").val("");
+            $("#p4").val("");
+            $("#p5").val("");
             $("#image").attr("src", "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Wikipedia-logo-v2-en.svg/1200px-Wikipedia-logo-v2-en.svg.png");
         });
 
@@ -353,7 +331,7 @@ function getSize(resultData, callback) {
 
                     try {
                         //Sets the first field name to the selected Wikipedia-page title.
-                        pl.setFieldText("wiki/author", $('#results')[0].options[selectedIndex].value);
+                        $("#p1").val($('#results')[0].options[selectedIndex].value);
                     }
                     catch(e) {
                         console.log("No search results are selected");
@@ -369,43 +347,43 @@ function getSize(resultData, callback) {
 
                         getBirthdate(resultData, function(value) {
 
-                            pl.setFieldText("wiki/info1", "Birthdate: " + value);
+                            $("#p2").val("Birthdate: " + value);
                         });
 
                         try {
                             let genderId = resultData.entities[pageId].claims.P21["0"].mainsnak.datavalue.value.id;
                             getPage(genderId, function(value) {
 
-                                pl.setFieldText("wiki/info2", "Gender: " + value);
+                                $("#p3").val("Gender: " + value);
                             });
                         }
                         catch(e) {
                             console.log("Can't find an ID of property 21 (gender) inside Wikidata of the selected Wikipedia page.");
-                            pl.setFieldText("wiki/info2", "Gender: unavailable");
+                            $("#p3").val("Gender: unavailable");
                         }
 
                         try {
                             let citizenshipId = resultData.entities[pageId].claims.P27["0"].mainsnak.datavalue.value.id;
                             getPage(citizenshipId, function(value) {
 
-                                pl.setFieldText("wiki/info3", "Citizenship: " + value);
+                                $("#p4").val("Citizenship: " + value);
                             });
                         }
                         catch(e) {
                             console.log("Can't find an ID of property 27 (citizenship) inside Wikidata of the selected Wikipedia page.");
-                            pl.setFieldText("wiki/info3", "Citizenship: unavailable");
+                            $("#p4").val("Citizenship: unavailable");
                         }
 
                         try {
                             let fieldOfWorkId = resultData.entities[pageId].claims.P106["0"].mainsnak.datavalue.value.id;
                             getPage(fieldOfWorkId, function(value) {
 
-                                pl.setFieldText("wiki/title", "Field of Work: " + value);
+                                $("#p5").val("Field of Work: " + value);
                             });
                         }
                         catch(e) {
                             console.log("Can't find an ID of property 106 (field of work) inside Wikidata of the selected Wikipedia page.");
-                            pl.setFieldText("wiki/title", "Field of Work: unavailable");
+                            $("#p5").val("Field of Work: unavailable");
                         }
 
                         //Following methods are used to find information about a country
@@ -413,12 +391,12 @@ function getSize(resultData, callback) {
 
                         getPopulation(resultData, function(value) {
 
-                            pl.setFieldText("wiki/info1", "Population: " + value);
+                            $("#p2").val("Population: " + value);
                         });
 
                         getSize(resultData, function(value) {
 
-                            pl.setFieldText("wiki/info2", "Size: " + value);
+                            $("#p3").val("Size: " + value);
                         });
 
                         //Trying to find currency in given country. Find ID for the currency, and send a new get-request through getPage
@@ -427,12 +405,12 @@ function getSize(resultData, callback) {
                             let currencyId = resultData.entities[pageId].claims.P38["0"].mainsnak.datavalue.value.id;
                             getPage(currencyId, function(value) {
 
-                                pl.setFieldText("wiki/info3", "Currency: " + value);
+                                $("#p4").val("Currency: " + value);
                             });
                         }
                         catch(e) {
                             console.log("Can't find an ID of property 38 (currency) inside Wikidata of the selected Wikipedia page.");
-                            pl.setFieldText("wiki/info3", "Currency: unavailable");
+                            $("#p4").val("Currency: unavailable");
                         }
 
                         //Trying to find which continent the given country is placed in (i.e Europe).
@@ -440,12 +418,12 @@ function getSize(resultData, callback) {
                             let partOfContinentId = resultData.entities[pageId].claims.P30["0"].mainsnak.datavalue.value.id;
                             getPage(partOfContinentId, function(value) {
 
-                                pl.setFieldText("wiki/title", "Part of Continent: " + value);
+                                $("#p5").val("Part of Continent: " + value);
                             });
                         }
                         catch(e) {
                             console.log("Can't find an ID of property 30 (part of continent) inside Wikidata of the selected Wikipedia page.");
-                            pl.setFieldText("wiki/title", "Part of Continent: unavailable");
+                            $("#p5").val("Part of Continent: unavailable");
                         }
 
                     }

@@ -6,59 +6,42 @@
     <title>Wikipedia Template</title>
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-    <script src="payloadhosting.js"></script>
-	<script src="bootstrap/javascripts/bootstrap.min.js"></script>
- 	<script src="bootstrap/javascripts/vizrtBootstrap.js"></script>
 	<script src="wikipedia.js"></script>
-	<link rel="stylesheet" href="bootstrap/stylesheets/styles.css">
 
 </head>
 
 	<style>
-	
-		#container {
-			width: 100%;
-			margin-top: 3%;
-
-		}
-	
-		#search, #clear {
-			width: 25%;
-			float: left;
-			margin-top: 2%;
-		}
-
-		#category {
-			width: 35%;
-		} 
-		
-		#searchInput {
-			width: 50%;
-			float: left;
-			padding-top: 2.3%;
-			margin-top: 2%;
-		}
-		
-		#results {
-			width: 100%;
-			margin-top: 2%;
-			float: left;
-		}
 
 		img {
 
-			margin-top: 5%;
-			width: 50%;
-			height: 25%;
-			margin-left: 25%;
-			margin-right: 25%;
+			margin-top: 3%;
+			width: 30%;
+			height: 15%;
+			margin-left: 15%;
 		}
+
+		#results {
+
+			margin-top: 2%;
+			width: 20%;
+		}
+
+		#p1, #p2, #p3, #p4, #p5 {
+
+			margin-top: 2%;
+		}
+
+		#searchInput, #search, #clear {
+
+			margin-top: 2%;
+		}
+
+
 	
 	</style>
 		<body>
 			<div id="container">
 				<label for="category">Category:</label>
-				<br>
 				<select id="category" class="btn btn-default">
 					<option value="person">Person</option>
 					<option value="country">Country</option>
@@ -70,6 +53,11 @@
 				<br>
 				<select id="results" class="btn btn-default"> </select>
 				<br>
+				<textarea readonly id ="p1"></textarea>
+				<textarea readonly id ="p2"></textarea>
+				<textarea readonly id ="p3"></textarea>
+				<textarea readonly id ="p4"></textarea>
+				<textarea readonly id ="p5"></textarea>
 				<img id="image" title="Picture from Wikipedia" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Wikipedia-logo-v2-en.svg/1200px-Wikipedia-logo-v2-en.svg.png">
 			</div>
 		</body>

@@ -1,0 +1,76 @@
+<!doctype html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Wikipedia Template</title>
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="payloadhosting.js"></script>
+	<script src="bootstrap/javascripts/bootstrap.min.js"></script>
+ 	<script src="bootstrap/javascripts/vizrtBootstrap.js"></script>
+	<script src="wikipedia.js"></script>
+	<link rel="stylesheet" href="bootstrap/stylesheets/styles.css">
+
+</head>
+
+	<style>
+	
+		#container {
+			width: 100%;
+			margin-top: 3%;
+
+		}
+	
+		#search, #clear {
+			width: 25%;
+			float: left;
+			margin-top: 2%;
+		}
+
+		#category {
+			width: 35%;
+		} 
+		
+		#searchInput {
+			width: 50%;
+			float: left;
+			padding-top: 2.3%;
+			margin-top: 2%;
+		}
+		
+		#results {
+			width: 100%;
+			margin-top: 2%;
+			float: left;
+		}
+
+		img {
+
+			margin-top: 5%;
+			width: 50%;
+			height: 25%;
+			margin-left: 25%;
+			margin-right: 25%;
+		}
+	
+	</style>
+		<body>
+			<div id="container">
+				<label for="category">Category:</label>
+				<br>
+				<select id="category" class="btn btn-default">
+					<option value="person">Person</option>
+					<option value="country">Country</option>
+				</select>
+				<br>
+					<input type="text" name="name" id="searchInput" placeholder="Wikipedia page"/>
+					<button type="button" id="search" class="btn btn-default">Search</button>
+					<button type="button" id="clear" class="btn btn-default">Clear</button>
+				<br>
+				<select id="results" class="btn btn-default"> </select>
+				<br>
+				<img id="image" title="Picture from Wikipedia" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Wikipedia-logo-v2-en.svg/1200px-Wikipedia-logo-v2-en.svg.png">
+			</div>
+		</body>
+</html>
